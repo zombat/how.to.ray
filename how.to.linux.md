@@ -205,6 +205,7 @@ The most common, non application specific, logs you will be gathering informatio
 
 Other application specific logs are usually located within `/var/log` or `/opt/log`, but can be located anywhere the developer decided. Check your documentation to be sure.
 
+
 ### Finding Information in Logs
 There are a few methods of finding the information that you're looking for in a log:
 - You can use `tail`, optionally specifying the number of lines, to find the last entries: `$ tail -n 20 /var/log/auth.log`
@@ -213,6 +214,14 @@ There are a few methods of finding the information that you're looking for in a 
 - You can combine `cat` and `grep` to find specific information within: `$ cat /var/log/auth.log | grep -i -C 2 root`
 
 *In the above examples -i searches case-insensitive, and -C 4 provides 2 lines of context before and after each match.*
+
+
+### Finding Information in Journald
+Another way of finding system logs is if you're using journald.
+- Follow works the same as `tail -f`: `$ sudo journalctl -f`
+- Searching by regex here can yield a ton of useful information if you know what you are looking for: `$ sudo journalctl -g root`
+- However, this is usually too much information, and you will waint to use `-u` to filter by unit (specifying the name of the service): `$ sudo journalctl -u postgres@14-main.service -f`
+
 
 
 ### Filesystems
