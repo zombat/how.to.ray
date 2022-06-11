@@ -71,7 +71,6 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 | SW1(config-line)# | `login` | Require logins for telnet sessions |
 | SW1(config-line)# | `transport input telnet` | Specify telnet connections only |
 
-
 ## SSH
 
 | Mode | Command | Description |
@@ -85,7 +84,6 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 | SW1(config-line)# | `login local` | Require local logins for SSH sessions |
 | SW1(config-line)# | `transport input ssh` | Specify SSH connections only |
 
-
 ## NTP
 
 | Mode | Command | Description |
@@ -98,7 +96,6 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 | SW1(config)# | `ntp server [ntp-host-address]` | Set NTP server synchronization with google |
 | SW1(config)# | `do show ntp associations` | See any NTP associations on the device |
 
-
 ## SNMP
 
 | Mode | Command | Description |
@@ -109,8 +106,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 | SW1(config)# | `snmp-server host [snmp-host-address] version 2c [snmp-community-name]` | Send SNMP2C messages to NMP collector with defined community string |
 | SW1(config)# | `snmp-server group [snmp-group-name] priv` | Create encrypted SNMPv3 server with encrypted logins |
 | SW1(config)# | `snmp-server user [snmp-user-name] [snmp-group-name] v3 auth sha [a-strong-password] priv aes 256 encryptpass access {1..99\|100..199}` | Create user Ray with an encrypted password |
-| SW1(config)# | `snmp-server host [snmp-host-address] informs version 3 pri [snmp-user-name]`	| Send SNMP v3 messages encrypted to SNMP collector with verification of receipt |
-
+| SW1(config)# | `snmp-server host [snmp-host-address] informs version 3 pri [snmp-user-name]` | Send SNMP v3 messages encrypted to SNMP collector with verification of receipt |
 
 ## Syslog
 
@@ -122,7 +118,6 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 | SW1(config)# | `logging [syslog-server]` | Send logs to DNS name or IP address |
 | SW1(config)# | `logging trap [logging-level]` | Set logging level *(Default = Informational)*  |
 
-
 ## VLANs
 
 | Mode | Command | Description |
@@ -132,14 +127,12 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 | SW1(config-vlan)# | `name [ASCII-Name]` | Set name for VLAN |
 | SW1(config-vlan)# | `remote-span` | Add the remote Switch Port Analyzer to the VLAN |
 
-
 ## VTP
 
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show vtp status` | Shows VTP operational status and mode |
 | SW1(config-if-range)# | `no vtp` | Safe bet is to disable this on every interface and only use it explicitly |
-
 
 ## CDP
 
@@ -149,14 +142,13 @@ Best practice would be to disable this globally, and only enable on trusted inte
 |------|---------|-------------|
 | SW1(config)# | `cdp run` | Enables CDP globally |
 | SW1(config)# | `cdp timer {5..254}` | Default = 60 seconds |
-| SW1(config)# | `cdp holdtime {10..255} `| |
+| SW1(config)# | `cdp holdtime {10..255}`| |
 | SW1(config)# | `cdp no run` | Disables CDP globally |
 | SW1(config-if)# | `no cdp enable` | Disables CDP per interface |
 | SW1# | `show cdp neighbor` | Shows brief CDP neighbor information |
 | SW1# | `show cdp neighbor detail` | Shows detailed CDP neighbor information |
 | SW1# | `show cdp neighbor [interface-type-[x/x\|xx/x/xx]] detail` | Show CDP information from one specific interface neighbor |
 | SW1# | `show cdp` | Shows global CDP information (like timers) |
-
 
 ## LLDP
 
@@ -165,25 +157,23 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `lldp run` | Enables LLDP globally |
-| SW1(config-if)#	| `no lldp transmit` | Do not trammit LLDP L2 messages on interface |
-| SW1(config-if)#	| `no lldp receive`	 | Ignore any LLDP L2 messages received on interface |
+| SW1(config-if)# | `no lldp transmit` | Do not trammit LLDP L2 messages on interface |
+| SW1(config-if)# | `no lldp receive`  | Ignore any LLDP L2 messages received on interface |
 | SW1# | `show lldp [interface-type-[x/x\|xx/x/xx]]` | Show LLDP stats and neighbor on interface |
 | SW1# | `show lldp neighbors` | Shows brief LLDP neighbor informatio |
 | SW1# | `show lldp entry [XXX]` | Details information regarding |
-
 
 ## Spanning Tree
 
 | Mode | Command | Description |
 |------|---------|-------------|
-| SW1# | `show spanning-tree `| Show spanning tree configuration |
+| SW1# | `show spanning-tree`| Show spanning tree configuration |
 | SW1(config)# | `spanning-tree mode rapid-pvst` | Enable Cisco Rapid Per-VLAN Spanning Tree |
-| SW1(config)# | `spanning-tree mode pvst `| Enable ieee STP |
-| SW1(config)# | `spanning-tree mode mst `| Enable MST STP <br> *Additional configuration required that is not shown* |
+| SW1(config)# | `spanning-tree mode pvst`| Enable ieee STP |
+| SW1(config)# | `spanning-tree mode mst`| Enable MST STP <br> *Additional configuration required that is not shown* |
 | SW1(config)# | `spanning-tree portfast default` | Enable portfast on all interfaces by | default. Critical to disable it for all other switchports that are not access | |
 | SW1(config)# | `spanning-tree bpduguard enable` | Don't receive BPDUs on this interface |
 | SW1(config)# | `spanning-tree bpdufilter enable` | Don’t send or receive PBDUs on this interface |
-
 
 ## Interface Configuration
 
@@ -202,7 +192,6 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1(config-if)# | `shutdown` | Disable interface |
 | SW1(config-if)# | `no shutdown` | Enable interface |
 
-
 ## L2 EtherChannel
 
 | Mode | Command | Description |
@@ -211,7 +200,6 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1(config-if-range)# | `channel-group {1..model-dependent} mode on` | Enable static EtherChannel |
 | SW1(config-if-range)# | `do show etherchannel summary` | Check EtherChannel status |
 | SW1(config-if-range)# | `no channel-group mode on` | Disable static EtherChannel |
-
 
 ## L2 PAgP
 
@@ -225,7 +213,6 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1(config-if-range)# | `no channel-group {1..model-dependent}` | Remove ports from channel group  |
 | SW1(config)# | `no interface port-channel {1..model-dependent}` | Delete channel group |
 
-
 ## L2 LACP
 
 | Mode | Command | Description |
@@ -238,7 +225,6 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1(config-if-range)# | `no channel-group {1..model-dependent}` | Remove ports from channel group |
 | SW1(config)# | `no interface port-channel {1..model-dependent}` | Delete channel group | |
 
-
 ## L3 EtherChannel
 
 | Mode | Command | Description |
@@ -249,7 +235,6 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1(config-if-range)# | `channel group {1..model-dependent} mode on` | Enable static EtherChannel |
 | SW1(config-if)# | `ip address [ip-address] [subnet-mask]` | Set IP address for interface |
 | SW1(config-if)# | `do show etherchannel summary` | Check EtherChannel status |
-
 
 ## Port Security
 
@@ -266,18 +251,16 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1# | `show port-security address` | Port-security statistics |
 | SW1# | `show port-security interface [interface-type-[x/x\|xx/x/xx]]` | Port-security information for specific interface |
 
-
 ## Err-disable Recovery
 
 | Mode | Command | Description |
 | ---- |-------- | ------------|
-| SW1# | `show errdisable recovery` | 	See which errdisable timers are enabled. |
-| SW(config)# | `errdisable recovery interval 30`	| Recover after 30 seconds. Will err-disable again if security condition is not cleared |
+| SW1# | `show errdisable recovery` |  See which errdisable timers are enabled. |
+| SW(config)# | `errdisable recovery interval 30` | Recover after 30 seconds. Will err-disable again if security condition is not cleared |
 | SW(config)# | `errdisable recovery cause all` | Enable err-disable recovery for all causes |
-| SW(config)# |` errdisable recovery cause [specific-cause]` | Enable err-disable recovery for individual cause: <br> arp-inspection <br> bpduguard <br> channel-misconfig	*(STP)* <br> dhcp-rate-limit <br> dtp-flap <br> gbic-invalid <br> inline-power <br> 12ptguard <br> link-flap <br> loopback <br> mac-limit <br> pagp-flap <br> port-mode-failure <br> pppoe-ia-rate-limit <br> errdisable recovery cause <br> psecure-violation <br> psp <br> sfp-config-mismatch <br> security-violation <br> small-frame <br> storm-control <br> udld <br> vmps |  |
+| SW(config)# |`errdisable recovery cause [specific-cause]` | Enable err-disable recovery for individual cause: <br> arp-inspection <br> bpduguard <br> channel-misconfig *(STP)* <br> dhcp-rate-limit <br> dtp-flap <br> gbic-invalid <br> inline-power <br> 12ptguard <br> link-flap <br> loopback <br> mac-limit <br> pagp-flap <br> port-mode-failure <br> pppoe-ia-rate-limit <br> errdisable recovery cause <br> psecure-violation <br> psp <br> sfp-config-mismatch <br> security-violation <br> small-frame <br> storm-control <br> udld <br> vmps |  |
 | SW# | `show errdisable flap-values` | Show flap reasons and current settings |
-| SW(config)# | `errdisable flap-setting	cause [specific-cause] max-flaps {1..100} time {1..120}` | Set values for individual flap causes: <br> pagp-flap <br> dtp-flap <br> link-flap <br> *I need to find the min-max*|
-
+| SW(config)# | `errdisable flap-setting cause [specific-cause] max-flaps {1..100} time {1..120}` | Set values for individual flap causes: <br> pagp-flap <br> dtp-flap <br> link-flap <br> *I need to find the min-max*|
 
 ## SPAN (Switch Port Analyzer / Mirror)
 
@@ -288,7 +271,6 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW(config)# | `monitor session {1..model-dependent} destination interface [interface-type-[x/x\|xx/x/xx]]` | Set output interface for SPAN |
 | SW(config)# | `monitor session {1..model-dependent} destination  remote vlan {1..4094}` | Set output VLAN for RSPAN |
 | SW(config)# | `monitor session {1..model-dependent} source` | Set interface/VLAN for to monitor with SPAN |
-
 
 ## IPv4 Subnets
 
@@ -346,13 +328,11 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | **Value** | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 | **Bit** | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 |
 
-
 ## IPV6
 
-If something is perfect, why reinvent the wheel? The following two items are from Wikipedia. https://en.wikipedia.org/wiki/IPv6_address
+If something is perfect, why reinvent the wheel? The following two items are from Wikipedia. <https://en.wikipedia.org/wiki/IPv6_address>
 
 ### Multicast
-
 
 | Address | Description | Available Scopes |
 | ------- | ----------- | ---------------- |
@@ -371,7 +351,7 @@ If something is perfect, why reinvent the wheel? The following two items are fro
 | ff02::1:3 | Link-local multicast name resolution | 2 (link-local) |
 | ff05::1:3 | All-dhcp-servers (DHCPv6) | 5 (site-local) |
 | ff02::1:ff00:0/104 | Solicited-node multicast address. | 2 (link-local) |
-| ff02::2:ff00:0/104 | 	Node information queries | 2 (link-local) |
+| ff02::2:ff00:0/104 |  Node information queries | 2 (link-local) |
 
 ### IPv6 Addressing
 
