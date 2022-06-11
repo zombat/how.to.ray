@@ -1,15 +1,15 @@
 # How to Cisco
 
-```
+```text
 Who am I?
 https://www.linkedin.com/in/propatriavigilans/
 https://raymondrizzo.com
 ```
 
+## Switching
 
-# Switching
+### Basic Commands
 
-## Basic Commands
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW | `enable`  | Logs into enable mode |
@@ -19,15 +19,15 @@ https://raymondrizzo.com
 | SW# | `reload` | Reboot device |
 | SW# | `show mac address-table` | Show switch MAC Address table |
 | SW# | `configure terminal` | Logs into configuration mode |
-| SW# | `ping [destination] `| Ping IP or DNS address *(Optionally, add source [local-interface-ip] address)* |
+| SW# | `ping [destination]`| Ping IP or DNS address *(Optionally, add source [local-interface-ip] address)* |
 | SW# | `show running-config` | Show current running configuration |
 | SW# | `show startup-config` | Show startup configuration |
 | SW# | `show running-config \| begin [case-sensative-string]` | Show current running configuration starting at specified string |
 | SW# | `show running-config \| include [case-sensative-string]` | Include configuration items matching the specified string |
 | ANY | `CTRL+SHIFT+6` | Interrupt running command/process |
 
+### FTP
 
-## FTP
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show flash` | Show contents of flash:// |
@@ -36,8 +36,8 @@ https://raymondrizzo.com
 | SW1# | `copy flash ftp` | Copy file from flash to FTP. *(May require colon[:] at the end)* |
 | SW1# | `copy flash tftp` | Copy file from flash to TFTP. *(May require colon[:] at the end)* |
 
-
 ## Basic Security
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show users` | See who is logged into a device |
@@ -46,8 +46,8 @@ https://raymondrizzo.com
 | SW1(config)# | `username [User-Name] privilege {1..15} password [password]` | Create a user with an unencrypted password |
 | SW1(config)# | `service password-encryption` | Encrypts any plain-text passwords in the configuration |
 
+### AAA / RADIUS
 
-## AAA / RADIUS
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `aaa new-model` | Enable AAA |
@@ -60,8 +60,8 @@ https://raymondrizzo.com
 | SW1(config)# | `line vty 0 4` | Select VTY ports |
 | SW1(config-line)# | `login authentication default` | Set line login method to default group |
 
+### Telnet
 
-## Telnet
 I really *shouldn't* have to say why this shouldn't be used, but **don't use this since it's unencrypted**.
 
 | Mode | Command | Description |
@@ -73,6 +73,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## SSH
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `hostname [Host-Name]` | Define a hostname for the device |
@@ -86,6 +87,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## NTP
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show clock` | See current date and time |
@@ -98,6 +100,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## SNMP
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `access-list {1..99\|100..199} permit host [snmp-host-address]` | Create ACL that allows one host |
@@ -110,6 +113,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## Syslog
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `terminal monitor` | Show syslog on ssh/telnet connections |
@@ -120,6 +124,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## VLANs
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show vlan / show vlan brief` | Shows all VLANS and non-trunk interfaces associated with VLANs |
@@ -129,6 +134,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## VTP
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show vtp status` | Shows VTP operational status and mode |
@@ -136,6 +142,7 @@ I really *shouldn't* have to say why this shouldn't be used, but **don't use thi
 
 
 ## CDP
+
 Best practice would be to disable this globally, and only enable on trusted interfaces.
 
 | Mode | Command | Description |
@@ -152,6 +159,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## LLDP
+
 Best practice would be to disable this globally, and only enable on trusted interfaces.
 
 | Mode | Command | Description |
@@ -165,6 +173,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## Spanning Tree
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show spanning-tree `| Show spanning tree configuration |
@@ -177,6 +186,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## Interface Configuration
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1# | `show interfaces` | Show interface configuration, counters, and line status |
@@ -194,6 +204,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## L2 EtherChannel
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `interface range [interface-type-[x/x\|xx/x/xx]]-[xx]` | Configure range of interfaces to be used in EtherChannel |
@@ -203,6 +214,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## L2 PAgP
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `interface range [interface-type-[x/x\|xx/x/xx]]-[xx]` | Configure range of interfaces to be used in PAgP |
@@ -215,6 +227,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## L2 LACP
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `interface range [interface-type-[x/x\|xx/x/xx]]-[xx]` | Configure range of interfaces to be used in LACP |
@@ -227,6 +240,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## L3 EtherChannel
+
 | Mode | Command | Description |
 |------|---------|-------------|
 | SW1(config)# | `interface range [interface-type-[x/x\|xx/x/xx]]-[xx]` | Configure range of interfaces to be used in EtherChannel |
@@ -238,6 +252,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## Port Security
+
 | Mode | Command | Description |
 | ---- |-------- | ------------|
 | SW1(config-if)# | `switchport port-security` | Enables default port-security config *(1 MAC Address and shutdown violation)* |
@@ -252,7 +267,8 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | SW1# | `show port-security interface [interface-type-[x/x\|xx/x/xx]]` | Port-security information for specific interface |
 
 
-# Err-disable Recovery
+## Err-disable Recovery
+
 | Mode | Command | Description |
 | ---- |-------- | ------------|
 | SW1# | `show errdisable recovery` | 	See which errdisable timers are enabled. |
@@ -264,6 +280,7 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## SPAN (Switch Port Analyzer / Mirror)
+
 | Mode | Command | Description |
 | ---- |-------- | ------------|
 | SW(config)# | `no monitor session {1..model-dependent}` | Clear any previous settings |
@@ -275,7 +292,8 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 ## IPv4 Subnets
 
-#### Class C
+### Class C
+
 | CIDR | /25 | /26 | /27 | /28 | /29 | /30 | /31 | /32 |
 | ---- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Networks** | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 |
@@ -284,7 +302,8 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | **Value** | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 | **Bit** | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 |
 
-#### Class B
+### Class B
+
 | CIDR | /17 | /18 | /19 | /20 | /21 | /22 | /23 | /24 |
 | ---- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Networks** | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 |
@@ -301,7 +320,8 @@ Best practice would be to disable this globally, and only enable on trusted inte
 | **Value** | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 | **Bit** | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 |
 
-#### Class A
+### Class A
+
 | CIDR | /9 | /10 | /11 | /12 | /13 | /14 | /15 | /16 |
 | ---- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Networks** | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 |
@@ -328,9 +348,10 @@ Best practice would be to disable this globally, and only enable on trusted inte
 
 
 ## IPV6
+
 If something is perfect, why reinvent the wheel? The following two items are from Wikipedia. https://en.wikipedia.org/wiki/IPv6_address
 
-#### Multicast
+### Multicast
 
 
 | Address | Description | Available Scopes |
@@ -352,7 +373,8 @@ If something is perfect, why reinvent the wheel? The following two items are fro
 | ff02::1:ff00:0/104 | Solicited-node multicast address. | 2 (link-local) |
 | ff02::2:ff00:0/104 | 	Node information queries | 2 (link-local) |
 
-#### IPv6 Addressing
+### IPv6 Addressing
+
 | Prefix | Precedence | Label | Usage |
 | ------ | ---------- | ----- | ----- |
 | ::1/128 | 50 | 0 | Localhost |
