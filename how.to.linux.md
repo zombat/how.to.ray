@@ -22,6 +22,8 @@ For further information on any command seen below, use one of the following meth
 
 - You can usually use the command, followed by `--help` for more information: `$ cat --help`
 - You can use the Linux man-pages to find more information: `$ man cat`
+  - Some entries may exist in more than one section (see: <https://en.wikipedia.org/wiki/Man_page>).
+  - To see what information is available, use the `-k` option: `man -k "^zip$"`
 
 ## Directory Navigation
 
