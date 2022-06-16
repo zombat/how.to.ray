@@ -4,6 +4,8 @@
 Who am I?
 https://www.linkedin.com/in/propatriavigilans/
 https://raymondrizzo.com
+
+
 ```
 
 ## Least Privilege and Root
@@ -67,6 +69,7 @@ For further information on any command seen below, use one of the following meth
 - This will allow text/data to be added without overwriting: `$ echo "This will also be in example.file.1" >> example.file.1`
 - Each time you append something, it will be added with a newline character at the end: `$ cat example.file.1`
 - You can pipe the output of one command to another to make you life easier: `$ ps -ef | grep -i bash`
+- At times, a file will contain too much information to be displayed in a single screen. You can pipe the output of cat to `more` to see each screen at a time, or use `less` to scroll back and forward through the file: `$ cat example.file.1 | less`
 
 ## Symbolic (Symlink) and Hard Links
 
@@ -110,27 +113,28 @@ For further information on any command seen below, use one of the following meth
 *If you are having difficulty running a shell script of binary file, ensure that you have the correct permissions for your user/group.*
 
 ```text
-drwxr-xr-x 4 example-user example-user  4096 May 23 13:36 .
-drwxr-xr-x 4 root         root          4096 May 23 13:36 ..
--rw-r--r-- 1 example-user example-user   220 May 23 13:36 .bash_logout
--rw-r--r-- 1 example-user example-user  5551 May 23 13:36 .bashrc
--rw-r--r-- 1 example-user example-user  3526 May 23 13:36 .bashrc.original
-drwxr-xr-x 5 example-user example-user  4096 May 23 13:36 .config
--rw-r--r-- 1 example-user example-user 11759 May 23 13:36 .face
-lrwxrwxrwx 1 example-user example-user     5 May 23 13:36 .face.icon -> .face
-drwxr-xr-x 3 example-user example-user  4096 May 23 13:36 .java
--rw-r--r-- 1 example-user example-user   807 May 23 13:36 .profile
--rw-r--r-- 1 example-user example-user 10877 May 23 13:36 .zshrc
-|\ /\ /\ / | \__________/ \__________/ \___/ \__________/  \___/
-| |  |  |  |      |             |        |        |           |- The file name
-| |  |  |  |      |             |        |        |-------- Time last modified
-| |  |  |  |      |             |------------------------------ Assigned group                  
-| |  |  |  |      |----------------------------------------------------- Owner
-| |  |  |  |--------------------------------- Number of hard links to the file
-| |  |  |------------------------------------- Permissions for all other users
-| |  |------------------------------------- Permissions for the assigned group
+drwxr-xr-x. 4 example-user example-user  4096 May 23 13:36 .
+drwxr-xr-x. 4 root         root          4096 May 23 13:36 ..
+-rw-r--r--. 1 example-user example-user   220 May 23 13:36 .bash_logout
+-rw-r--r--. 1 example-user example-user  5551 May 23 13:36 .bashrc
+-rw-r--r--. 1 example-user example-user  3526 May 23 13:36 .bashrc.original
+drwxr-xr-x. 5 example-user example-user  4096 May 23 13:36 .config
+-rw-r--r--. 1 example-user example-user 11759 May 23 13:36 .face
+lrwxrwxrwx. 1 example-user example-user     5 May 23 13:36 .face.icon -> .face
+drwxr-xr-x. 3 example-user example-user  4096 May 23 13:36 .java
+-rw-r--r--. 1 example-user example-user   807 May 23 13:36 .profile
+-rw-r--r--+ 1 example-user example-user 10877 May 23 13:36 .zshrc
+|\ /\ /\ /| | \__________/ \__________/ \___/ \__________/  \___/
+| |  |  | | |      |             |        |        |         |- File name
+| |  |  | | |      |             |        |        |-------- Last modified
+| |  |  | | |      |             |------------------------- Assigned group                  
+| |  |  | | |      |------------------------------------------------ Owner
+| |  |  | | |----------------------------- Number of hard links to the file
+| |  |  | |- ACL (Access Control List) Permissions used to protect the file
+| |  |  |--------------------------------- Permissions for all other users
+| |  |--------------------------------- Permissions for the assigned group
 | |------------------------------------ Permissions allowed for the user/owner
-| -------------------------------------------------------- Directory or a file
+| ----------------------------------------------------- Directory or a file
                                                            d = directory
                                                            - = file
 ```
@@ -143,7 +147,7 @@ The available permissions are:
 - Write: Able to overwrite and delete file
 - Execute: Able to run file
 
-### Permissions
+### Permissions (Basic)
 
 Permissions can be set for user, group, other in one shot by using the octal values associated with the permissions.
 
@@ -172,7 +176,7 @@ Individual permissions can also be removed for user/group other.
 - Change file owner user: `$ chown username example.file.1`
 - Change file owner group: `$ chgrp`
 
-## File Execution
+### File Execution
 
 Usually, you will be able to execute most files in the `/bin`, `/sbin`, `/usr/bin`, and `/usr/sbin` directories without directly specifying their full location, as these are in the `PATH` environment variable.
 
@@ -194,6 +198,30 @@ I've executed!
 ```
 
 The above example is referring to execute.me by using `./` to reference the current directory.
+
+### Permissions (Advanced)
+
+ACL (Access Control List) permissions are used to protect files at a more granular level. This will only verify that your kernel is able to use ACLs, and not explain how to compile a kernel to allow them.
+
+**Note:** This can also be used with groups.
+
+- First, you need to know what file systems are mounted: `$ mount`
+- For the next part, you need to know which kernel is running on your system: `$ uname -a`
+- From that point, you can determine if the kernel is using ACLs or not: `$ cat /boot/config-5.4.0-109-generic | grep -i acl`
+- Check to see if the ACL package is installed: `$ dpkg -l | grep -i acl`
+- Install it if needed: `$ sudo apt-get install acl`
+- Make a test directory: `$ sudo mkdir /tmp/test.directory`
+- Remove execute permissions for other users: `$ sudo chmod o-x /tmp/test.directory`
+- You should not be able to access the directory: `$ cd /tmp/test.directory`
+- *Modify (-m)* the permissions on the directory to allow your user: `$ setfacl -m u:$USER:rwx /tmp/test.directory`
+- You should be able to access the directory: `$ cd /tmp/test.directory`
+- Create a subdirectory: `$ sudo mkdir /tmp/test.directory/subdirectory`
+- You should be able to access the subdirectory: `$ cd /tmp/test.directory/subdirectory`
+- But not create a file: `$ touch this`
+- Set a default ACL to apply to any new files and subdirectories: `$ setfacl -m d:u:$USER:rwx /tmp/test.directory`
+- Create a second subdirectory: `$ sudo mkdir /tmp/test.directory/subdirectory2`
+- You should be able to access the subdirectory: `$ cd /tmp/test.directory/subdirectory2`
+- As well as create a file: `$ touch this`
 
 ## Locating Files and Directories
 
@@ -253,17 +281,19 @@ Changing IP addressing on Linux varies by distribution, and is beyond the scope 
 ### Steps to Verify Network Connectivity
 
 1. Check your interface to ensure an IP address is set: `$ ip addr`
-2. Test your local IPv4 stack with: `$ ping -c 3 127.0.0.1`
+2. Check your interface status: `$ ip link`
+3. Check your ARP cache: `$ ip neigh`
+4. Test your local IPv4 stack with: `$ ping -c 3 127.0.0.1`
     - Alternatively you may test your IPv6 stack with: `$ ping ::1`
-3. Ping your static/DHCP address: `$ ping -c 3 xxx.xxx.xxx.xxx`
-4. Find your default gateway: `$ ip route`
-5. Ping your default gateway: `$ ping -c 3 xxx.xxx.xxx.xxx`
-6. Ping any remote IP addresses that you are attempting to connect to: `$ ping -c 3 xxx.xxx.xxx.xxx`
-7. If you are using DNS to resolve hostnames:
+5. Ping your static/DHCP address: `$ ping -c 3 xxx.xxx.xxx.xxx`
+6. Find your default gateway and local routing table: `$ ip route`
+7. Ping your default gateway: `$ ping -c 3 xxx.xxx.xxx.xxx`
+8. Ping any remote IP addresses that you are attempting to connect to: `$ ping -c 3 xxx.xxx.xxx.xxx`
+9. If you are using DNS to resolve hostnames:
     1. Ensure DNS nameservers are configured `$ cat /etc/resolv.conf`
     2. Ping each DNS server: `$ ping -c 3 xxx.xxx.xxx.xxx`
     3. Attempt to resolve the FQDN/Hostname of the server you're connecting to: `$ dig the-server`
-8. If you are running a service locally that is not responding remotely
+10. If you are running a service locally that is not responding remotely
     1. Ensure that the service is running: `$ sudo ps -ef | grep -i service-name`
     2. Ensure that the service is listening: `$ sudo netstat -tunap | grep -i service-name`
     3. Attempt to connect to the service locally: `$ nc 127.0.0.1 port-number-of-service`
