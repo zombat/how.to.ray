@@ -4,8 +4,6 @@
 Who am I?
 https://www.linkedin.com/in/propatriavigilans/
 https://raymondrizzo.com
-
-
 ```
 
 ## Least Privilege and Root
