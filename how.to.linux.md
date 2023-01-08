@@ -181,15 +181,15 @@ Usually, you will be able to execute most files in the `/bin`, `/sbin`, `/usr/bi
 When a file that is marked executable is not locatable in the `PATH` variable, you will need to specify the full location.
 
 ```text
-┌──(example-user㉿kvm)-[/tmp]
+┌──(example-user@kvm)-[/tmp]
 └─$ ls -la execute.me
 -rwxr-xr-x 1 example-user example-user 35 May 23 14:35 execute.me
 
-┌──(example-user㉿kvm)-[/tmp]
+┌──(example-user@kvm)-[/tmp]
 └─$ execute.me
 execute.me: command not found
 
-┌──(example-user㉿kvm)-[/tmp]
+┌──(example-user@kvm)-[/tmp]
 └─$ ./execute.me
 I've executed!
 

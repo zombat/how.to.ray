@@ -6,6 +6,23 @@ https://www.linkedin.com/in/propatriavigilans/
 https://raymondrizzo.com
 ```
 
+## Note on SSH and Older Devices
+
+Connecting to older devices *usually* won't work correctly, due to depreciated algorithms.  To fix this, you can use the following command:
+
+```bash
+ssh -o "HostKeyAlgorithms +ssh-rsa KexAlgorithms=+diffie-hellman-group1-sha1" [username]@[ip-address]
+```
+
+Alternatively, you can add the following to your `~/.ssh/config` file:
+
+```bash
+Host *
+    HostKeyAlgorithms +ssh-rsa
+    KexAlgorithms +diffie-hellman-group1-sha1
+```
+
+
 ## Switching
 
 ### Basic Commands
